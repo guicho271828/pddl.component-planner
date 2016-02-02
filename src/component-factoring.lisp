@@ -5,9 +5,11 @@
 (defvar *iterative-resource* nil)
 (defun component-factoring-bpvectors (problem)
   (-<>>
-      (iter (for seed in (types-in-goal problem))
-            (appending
-             (task-bags problem seed)))
+   (types-in-goal problem)
+   (format<> t "~&types in goal: ~a" <>)
+   (iter (for seed in <>)
+         (appending
+          (task-bags problem seed)))
     (sort <> #'> :key #'length)
     (format<> t "~&Categorizing TASKS by plan compatibility.")
     (format<> t "~&Calling the preprocessing planner ~a" *preprocessor*)
